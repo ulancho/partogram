@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JSON store</title>
+</head>
+<body>
+<button onclick="go()">ok</button>
+
+
+<script>
+	async function go(){
+       
+
+     const user = await fetch('https://www.jsonstore.io/cf024bb815a93131ce9fed91b1f9dafa43a3c557e9be66e66fd76df5c64f10fe/users/1')
+       .then(
+       	function(response) {
+        return response.json();
+     });
+
+    console.log(user.ok);
+
+
+
+	 }
+
+
+
+</script>
+</body>
+</html>

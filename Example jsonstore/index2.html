@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>user1</title>
+</head>
+<body>
+
+<form id="chat_form">
+	<input type="text" name="user_name">
+	<input type="text" name="user_msg">
+	<input type="submit" value="отправить">
+</form>
+
+
+
+<script>
+	let form = document.querySelector('#chat_form');
+	form.onsubmit = function(e){
+		let user_name = document.querySelector('input[name=user_name]').value;
+		let user_msg = document.querySelector('input[name=user_msg]').value;
+        console.log(user_name);
+        let js = {
+        	user_name:user_name,
+        	user_msg:user_msg
+        };
+
+        js = JSON.stringify(js);
+
+        e.preventDefault();
+
+      fetch('https://www.jsonstore.io/c464eae93baf5e0f2d3cdf8bf8ee6cb2c04dd341925c39eea127ff9a65d33acc',
+      {      
+      	headers: {'Content-type': 'application/json'},
+        method: 'POST',           
+        body: JSON.stringify(js)
+      }).then(res => res.json())
+         .then(data => console.log(data))
+	}
+
+	fetch('https://www.jsonstore.io/c464eae93baf5e0f2d3cdf8bf8ee6cb2c04dd341925c39eea127ff9a65d33acc')
+	.then(res => res.json())
+    .then(data => console.log(data))
+
+
+
+// 	fetch('https://www.jsonstore.io/c464eae93baf5e0f2d3cdf8bf8ee6cb2c04dd341925c39eea127ff9a65d33acc', {
+//   headers: {
+//     'Content-type': 'application/json'
+//   },
+//   method: 'POST',
+//   body: { name: 'Ulan juma', age: 31 },
+// });
+</script>
+</body>
+</html>
