@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>user1</title>
+</head>
+<body>
+
+<form id="chat_form">
+	<input type="text" name="user_fio">
+	<input type="text" name="user_email">
+  <input type="text" name="user_phone">
+	<input type="submit" value="отправить">
+</form>
+
+
+
+<script>
+  const store_url = 'https://www.jsonstore.io/03573d0edfd7f58193c4e2cc0611823f89dbf9ec045d0f38be0eadc4510aceb6';
+	let form = document.querySelector('#chat_form');
+  var array = [];
+  fetch(store_url)
+  .then(response=>response.json())
+  .then(data=>{
+    if (!data.result) return
+    array = JSON.parse(data.result)
+    console.log(array);
+  })
+
+	form.onsubmit = function(e){
+    e.preventDefault();
+		let user_fio = document.querySelector('input[name=user_fio]').value;
+		let user_email = document.querySelector('input[name=user_email]').value;
+    let user_phone = document.querySelector('input[name=user_phone]').value;
+
+    let obj = {
+        user_fio:user_fio,
+        user_email:user_email,
+        user_phone:user_phone
+    };
+
+    array.push(obj);
+
+    let json = JSON.stringify(array);
+
+    fetch(store_url,
+      {      
+      	headers: {'Content-type': 'application/json'},
+        method: 'POST',           
+        body: JSON.stringify(json)
+    }).then(res => res.json())
+      .then(data => console.log(data))
+
+	}
+
+
+
+</script>
+</body>
+</html>

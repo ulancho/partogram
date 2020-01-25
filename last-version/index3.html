@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>admin</title>
+</head>
+<body>
+
+
+<script>
+	const store_url = 'https://www.jsonstore.io/03573d0edfd7f58193c4e2cc0611823f89dbf9ec045d0f38be0eadc4510aceb6';
+	fetch(store_url)
+	.then(res => res.json())
+    .then(data => show_data(data.result))
+
+    function show_data(data){
+    	data = JSON.parse(data);
+    	console.log(data);
+    	let p = '';
+         for(let item of data){
+          p += `<p>${item.user_fio}</p>`;
+         }
+
+          document.body.innerHTML = p;
+    }
+</script>
+</body>
+</html>
